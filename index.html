@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script type="text/javascript">
+    const webIntegrationId = "hYEVz6U4O9gifAUgkkOOG5DWIZDA5czl";
+    function login() {
+      function isLoggedIn() {
+        return fetch("https://yourtenant.eu.qlikcloud.com/api/v1/users/me", {
+          method: 'GET',
+          mode: 'cors',
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json',
+            'qlik-web-integration-id': webIntegrationId,
+          },
+        }).then(response => {
+          return response.status === 200;
+        });
+      }
+      return isLoggedIn().then(loggedIn => {
+        if (!loggedIn) {
+          // check login
+            window.top.location.href = "https://yourtenant.eu.qlikcloud.com/login?qlik-web-integration-id=" + webIntegrationId + "&returnto=" + top.location.href;
+          throw new Error('not logged in');
+        }
+      });
+    }
+	login()
+  </script>
+</head>
+
+<body style="height:600px;">
+	
+      <iframe src="https://839p7dmjhpjpkxr.sg.qlikcloud.com/single/?appid=732ac2c7-f056-4bc9-b0fc-f9c3131a0a91&sheet=721b20be-ae95-44e1-b476-b50969ca536f&theme=FSMK1&opt=ctxmenu,currsel" style="border:none;width:100%;height:100%;"></iframe>
+      
+	
+</body>
+
+</html>
